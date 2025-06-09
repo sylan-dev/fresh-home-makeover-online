@@ -20,12 +20,8 @@ const Footer = () => {
   ];
 
   const brands = [
-    'Brastemp',
     'Samsung',
-    'Electrolux',
-    'Consul',
-    'LG',
-    'Whirlpool'
+    'LG',   
   ];
 
   return (
