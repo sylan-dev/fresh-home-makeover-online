@@ -6,7 +6,8 @@ import {
   Mail, 
   MapPin, 
   Clock,
-  MessageCircle
+  MessageCircle,
+  CheckCircle
 } from 'lucide-react';
 
 const Contact = () => {
