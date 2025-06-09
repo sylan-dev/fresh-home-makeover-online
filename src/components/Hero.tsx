@@ -1,8 +1,39 @@
 
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Star } from 'lucide-react';
+import { CheckCircle, Star, MessageCircle } from 'lucide-react';
 
 const Hero = () => {
+  const whatsappNumber = "5511999999999";
+
+  const handleWhatsAppClick = () => {
+    const mensagem = "Olá! Vi o site e gostaria de solicitar um orçamento para serviços de reparo domiciliar. Podem me ajudar?";
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Coleta os dados do formulário
+    const formData = new FormData(e.currentTarget);
+    const nome = formData.get('nome');
+    const telefone = formData.get('telefone');
+    const servico = formData.get('servico');
+
+    // Cria a mensagem para o WhatsApp
+    const mensagem = `Olá! Gostaria de um orçamento rápido:
+
+👤 Nome: ${nome}
+📞 Telefone: ${telefone}
+🔧 Serviço: ${servico}
+
+Aguardo contato. Obrigado!`;
+
+    // Redireciona para o WhatsApp
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section id="inicio" className="relative overflow-hidden bg-gradient-primary text-white">
       <div className="absolute inset-0 bg-black/10"></div>
@@ -32,8 +63,14 @@ const Hero = () => {
               <Button size="lg" variant="secondary" className="text-primary font-semibold">
                 Solicitar Orçamento Grátis
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                Ver Nossos Serviços
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white text-white hover:bg-white hover:text-primary"
+                onClick={handleWhatsAppClick}
+              >
+                <MessageCircle className="mr-2" size={20} />
+                WhatsApp
               </Button>
             </div>
             
@@ -56,27 +93,36 @@ const Hero = () => {
           <div className="animate-fade-in-up lg:justify-self-end">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold mb-6 text-center">Orçamento Rápido</h3>
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleFormSubmit}>
                 <input
                   type="text"
+                  name="nome"
                   placeholder="Seu nome"
+                  required
                   className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
                 <input
                   type="tel"
+                  name="telefone"
                   placeholder="Seu telefone"
+                  required
                   className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
-                <select className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-                  <option>Selecione o serviço</option>
-                  <option>Elétrica</option>
-                  <option>Hidráulica</option>
-                  <option>Pintura</option>
-                  <option>Marcenaria</option>
-                  <option>Outros</option>
+                <select 
+                  name="servico" 
+                  required
+                  className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                >
+                  <option value="">Selecione o serviço</option>
+                  <option value="Elétrica">Elétrica</option>
+                  <option value="Hidráulica">Hidráulica</option>
+                  <option value="Pintura">Pintura</option>
+                  <option value="Marcenaria">Marcenaria</option>
+                  <option value="Outros">Outros</option>
                 </select>
-                <Button className="w-full bg-yellow-400 text-gray-800 hover:bg-yellow-500 font-semibold">
-                  Solicitar Orçamento
+                <Button type="submit" className="w-full bg-yellow-400 text-gray-800 hover:bg-yellow-500 font-semibold">
+                  <MessageCircle className="mr-2" size={20} />
+                  Enviar via WhatsApp
                 </Button>
               </form>
             </div>
