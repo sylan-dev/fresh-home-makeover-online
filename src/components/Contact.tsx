@@ -11,41 +11,38 @@ import {
 } from 'lucide-react';
 
 const Contact = () => {
-  const whatsappNumber = "5511999999999"; // Número do WhatsApp (código do país + DDD + número)
+  const whatsappNumber = "5511966424414";
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Coleta os dados do formulário
     const formData = new FormData(e.currentTarget);
     const nome = formData.get('nome');
     const telefone = formData.get('telefone');
     const email = formData.get('email');
-    const servico = formData.get('servico');
-    const descricao = formData.get('descricao');
+    const equipamento = formData.get('equipamento');
+    const problema = formData.get('problema');
 
-    // Cria a mensagem para o WhatsApp
-    const mensagem = `Olá! Gostaria de solicitar um orçamento:
+    const mensagem = `Olá! Gostaria de agendar uma visita técnica:
     
 📝 *Dados do Cliente:*
 Nome: ${nome}
 Telefone: ${telefone}
 E-mail: ${email}
 
-🔧 *Serviço:* ${servico}
+🔧 *Equipamento:* ${equipamento}
 
-📋 *Descrição:*
-${descricao}
+❌ *Problema:*
+${problema}
 
-Aguardo retorno para orçamento. Obrigado!`;
+Aguardo retorno para agendamento. Obrigado!`;
 
-    // Redireciona para o WhatsApp
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
     window.open(whatsappUrl, '_blank');
   };
 
   const handleWhatsAppClick = () => {
-    const mensagem = "Olá! Gostaria de solicitar um orçamento para serviços de reparo domiciliar. Podem me ajudar?";
+    const mensagem = "Olá! Gostaria de agendar uma visita técnica para conserto de máquina de lavar.";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -54,28 +51,28 @@ Aguardo retorno para orçamento. Obrigado!`;
     {
       icon: Phone,
       title: 'Telefone',
-      details: ['(11) 99999-9999', '(11) 3333-3333'],
+      details: ['(11) 96642-4414'],
       action: 'Ligar Agora',
-      onClick: () => window.open('tel:+5511999999999')
+      onClick: () => window.open('tel:+5511966424414')
     },
     {
       icon: Mail,
       title: 'E-mail',
-      details: ['contato@lavaesecaonline.com.br', 'orcamento@lavaesecaonline.com.br'],
+      details: ['contato@lavaesecaonline.com.br'],
       action: 'Enviar E-mail',
       onClick: () => window.open('mailto:contato@lavaesecaonline.com.br')
     },
     {
       icon: MapPin,
       title: 'Localização',
-      details: ['São Paulo - SP', 'Atendemos toda a região metropolitana'],
+      details: ['Rua João Kaufmann, 123', 'Rochdale - Osasco, SP'],
       action: 'Ver no Mapa',
-      onClick: () => window.open('https://maps.google.com/?q=São Paulo, SP')
+      onClick: () => window.open('https://maps.google.com/?q=Rochdale Osasco SP')
     },
     {
       icon: Clock,
-      title: 'Horário',
-      details: ['Segunda a Sábado: 8h às 18h', 'Emergências: 24 horas'],
+      title: 'Atendimento',
+      details: ['Segunda a Sábado', 'Agendamento de visitas'],
       action: 'Agendar',
       onClick: handleWhatsAppClick
     }
@@ -89,7 +86,7 @@ Aguardo retorno para orçamento. Obrigado!`;
             Entre em <span className="text-primary">Contato</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Estamos prontos para atender você! Entre em contato e solicite seu orçamento gratuito
+            Agende sua visita técnica gratuita! Atendemos Osasco e região com rapidez e qualidade.
           </p>
         </div>
 
@@ -141,7 +138,7 @@ Aguardo retorno para orçamento. Obrigado!`;
           <div className="animate-fade-in-up">
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl text-center">Solicite seu Orçamento</CardTitle>
+                <CardTitle className="text-2xl text-center">Agendar Visita Técnica</CardTitle>
               </CardHeader>
               <CardContent>
                 <form className="space-y-4" onSubmit={handleFormSubmit}>
@@ -169,38 +166,35 @@ Aguardo retorno para orçamento. Obrigado!`;
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                   <select 
-                    name="servico" 
+                    name="equipamento" 
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary"
                   >
-                    <option value="">Selecione o serviço</option>
-                    <option value="Serviços Elétricos">Serviços Elétricos</option>
-                    <option value="Hidráulica">Hidráulica</option>
-                    <option value="Pintura">Pintura</option>
-                    <option value="Marcenaria">Marcenaria</option>
-                    <option value="Reformas Gerais">Reformas Gerais</option>
-                    <option value="Manutenção">Manutenção</option>
-                    <option value="Outros">Outros</option>
+                    <option value="">Selecione o equipamento</option>
+                    <option value="Máquina de Lavar">Máquina de Lavar</option>
+                    <option value="Lava e Seca">Lava e Seca</option>
+                    <option value="Secadora">Secadora</option>
+                    <option value="Geladeira">Geladeira</option>
                   </select>
                   <textarea
-                    name="descricao"
-                    placeholder="Descreva o serviço que você precisa..."
+                    name="problema"
+                    placeholder="Descreva o problema: não liga, faz barulho, não entra água, etc..."
                     rows={4}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                   ></textarea>
                   <Button type="submit" className="w-full font-semibold">
-                    Enviar via WhatsApp
+                    Agendar via WhatsApp
                   </Button>
                 </form>
                 
                 <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
                   <div className="flex items-center space-x-2 text-green-800">
                     <CheckCircle size={20} />
-                    <span className="font-semibold">Orçamento 100% Gratuito</span>
+                    <span className="font-semibold">Visita Técnica Gratuita</span>
                   </div>
                   <p className="text-green-700 text-sm mt-1">
-                    Sem compromisso • Resposta em até 2 horas • Atendimento personalizado
+                    Sem compromisso • Diagnóstico rápido • Orçamento transparente
                   </p>
                 </div>
               </CardContent>

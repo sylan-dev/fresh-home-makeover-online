@@ -1,14 +1,18 @@
 
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Star, MessageCircle } from 'lucide-react';
+import { CheckCircle, Star, MessageCircle, Phone } from 'lucide-react';
 
 const Hero = () => {
-  const whatsappNumber = "5511999999999";
+  const whatsappNumber = "5511966424414";
 
   const handleWhatsAppClick = () => {
-    const mensagem = "Olá! Vi o site e gostaria de solicitar um orçamento para serviços de reparo domiciliar. Podem me ajudar?";
+    const mensagem = "Olá! Vi o site e gostaria de solicitar um orçamento para conserto de máquina de lavar. Podem me ajudar?";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  const handlePhoneClick = () => {
+    window.open('tel:+5511966424414');
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,16 +22,18 @@ const Hero = () => {
     const formData = new FormData(e.currentTarget);
     const nome = formData.get('nome');
     const telefone = formData.get('telefone');
-    const servico = formData.get('servico');
+    const equipamento = formData.get('equipamento');
+    const problema = formData.get('problema');
 
     // Cria a mensagem para o WhatsApp
-    const mensagem = `Olá! Gostaria de um orçamento rápido:
+    const mensagem = `Olá! Gostaria de agendar uma visita técnica:
 
 👤 Nome: ${nome}
 📞 Telefone: ${telefone}
-🔧 Serviço: ${servico}
+🔧 Equipamento: ${equipamento}
+❌ Problema: ${problema}
 
-Aguardo contato. Obrigado!`;
+Aguardo contato para agendamento. Obrigado!`;
 
     // Redireciona para o WhatsApp
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
@@ -46,22 +52,28 @@ Aguardo contato. Obrigado!`;
                   <Star key={star} size={20} fill="currentColor" />
                 ))}
               </div>
-              <span className="text-sm font-medium">+1000 clientes satisfeitos</span>
+              <span className="text-sm font-medium">+6 anos no mercado</span>
             </div>
             
             <h1 className="text-4xl lg:text-6xl font-bold font-poppins mb-6 leading-tight">
-              Serviços de Reparo
-              <span className="block text-yellow-400">Domiciliar</span>
+              Assistência Técnica
+              <span className="block text-yellow-400">Lava & Seca</span>
             </h1>
             
             <p className="text-xl mb-8 text-blue-100 leading-relaxed">
-              Profissionais qualificados para resolver todos os problemas da sua casa. 
-              Rapidez, qualidade e garantia em todos os serviços.
+              Conserto de Máquina de Lavar, Lava e Seca e Secadora em Osasco e São Paulo. 
+              Orçamento transparente e serviço de qualidade.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Button size="lg" variant="secondary" className="text-primary font-semibold">
-                Solicitar Orçamento Grátis
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="text-primary font-semibold"
+                onClick={handlePhoneClick}
+              >
+                <Phone className="mr-2" size={20} />
+                (11) 96642-4414
               </Button>
               <Button 
                 size="lg" 
@@ -77,22 +89,22 @@ Aguardo contato. Obrigado!`;
             <div className="grid sm:grid-cols-3 gap-6">
               <div className="flex items-center space-x-3">
                 <CheckCircle className="text-green-400" size={24} />
-                <span className="font-medium">Atendimento 24h</span>
+                <span className="font-medium">Visita no Local</span>
               </div>
               <div className="flex items-center space-x-3">
                 <CheckCircle className="text-green-400" size={24} />
-                <span className="font-medium">Garantia Total</span>
+                <span className="font-medium">Orçamento Transparente</span>
               </div>
               <div className="flex items-center space-x-3">
                 <CheckCircle className="text-green-400" size={24} />
-                <span className="font-medium">Preço Justo</span>
+                <span className="font-medium">Garantia nos Serviços</span>
               </div>
             </div>
           </div>
           
           <div className="animate-fade-in-up lg:justify-self-end">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <h3 className="text-2xl font-bold mb-6 text-center">Orçamento Rápido</h3>
+              <h3 className="text-2xl font-bold mb-6 text-center">Agendar Visita Técnica</h3>
               <form className="space-y-4" onSubmit={handleFormSubmit}>
                 <input
                   type="text"
@@ -109,20 +121,26 @@ Aguardo contato. Obrigado!`;
                   className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 />
                 <select 
-                  name="servico" 
+                  name="equipamento" 
                   required
                   className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 >
-                  <option value="">Selecione o serviço</option>
-                  <option value="Elétrica">Elétrica</option>
-                  <option value="Hidráulica">Hidráulica</option>
-                  <option value="Pintura">Pintura</option>
-                  <option value="Marcenaria">Marcenaria</option>
-                  <option value="Outros">Outros</option>
+                  <option value="">Selecione o equipamento</option>
+                  <option value="Máquina de Lavar">Máquina de Lavar</option>
+                  <option value="Lava e Seca">Lava e Seca</option>
+                  <option value="Secadora">Secadora</option>
+                  <option value="Geladeira">Geladeira</option>
                 </select>
+                <input
+                  type="text"
+                  name="problema"
+                  placeholder="Qual o problema? (ex: não liga, faz barulho)"
+                  required
+                  className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                />
                 <Button type="submit" className="w-full bg-yellow-400 text-gray-800 hover:bg-yellow-500 font-semibold">
                   <MessageCircle className="mr-2" size={20} />
-                  Enviar via WhatsApp
+                  Agendar via WhatsApp
                 </Button>
               </form>
             </div>

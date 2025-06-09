@@ -6,6 +6,12 @@ import { Button } from '@/components/ui/button';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleWhatsAppClick = () => {
+    const mensagem = "Olá! Gostaria de agendar uma visita técnica.";
+    const whatsappUrl = `https://wa.me/5511966424414?text=${encodeURIComponent(mensagem)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   const menuItems = [
     { label: 'Início', href: '#inicio' },
     { label: 'Serviços', href: '#servicos' },
@@ -21,7 +27,7 @@ const Header = () => {
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <Phone size={14} />
-              <span>(11) 99999-9999</span>
+              <span>(11) 96642-4414</span>
             </div>
             <div className="flex items-center space-x-2">
               <Mail size={14} />
@@ -29,7 +35,7 @@ const Header = () => {
             </div>
           </div>
           <div className="text-xs">
-            Atendimento: Segunda a Sábado, 8h às 18h
+            Assistência Técnica Especializada • Osasco e Região
           </div>
         </div>
 
@@ -37,7 +43,7 @@ const Header = () => {
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center">
             <h1 className="text-2xl font-bold font-poppins text-primary">
-              LavaEseca<span className="text-foreground">Online</span>
+              Lava&Seca<span className="text-foreground">Online</span>
             </h1>
           </div>
 
@@ -55,8 +61,8 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Button size="sm" className="hidden md:inline-flex">
-              Solicitar Orçamento
+            <Button size="sm" className="hidden md:inline-flex" onClick={handleWhatsAppClick}>
+              Agendar Visita
             </Button>
 
             {/* Mobile Menu Button */}
@@ -83,8 +89,8 @@ const Header = () => {
                   {item.label}
                 </a>
               ))}
-              <Button size="sm" className="mt-4 w-fit">
-                Solicitar Orçamento
+              <Button size="sm" className="mt-4 w-fit" onClick={handleWhatsAppClick}>
+                Agendar Visita
               </Button>
             </nav>
           </div>
