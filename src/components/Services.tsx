@@ -41,8 +41,7 @@ const Services = () => {
   ];
 
   const brands = [
-    'Brastemp', 'Samsung', 'Electrolux', 'Consul', 'LG', 'Whirlpool'
-  ];
+    'Brastemp', 'Samsung', 'Electrolux', 'Consul', 'LG'  ];
 
   const process = [
     {
