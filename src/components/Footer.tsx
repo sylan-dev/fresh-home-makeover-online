@@ -78,12 +78,29 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contato</h4>
+            <h4 className="text-lg font-semibold mb-4">Contatos</h4>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone size={16} className="text-blue-400 flex-shrink-0" />
                 <p className="text-sm text-gray-300">(11) 96642-4414</p>
+               
               </div>
+
+                <div className="flex items-center space-x-3">
+                <Phone size={16} className="text-blue-400 flex-shrink-0" />
+                <p className="text-sm text-gray-300">(11) 97607-6565</p>
+               </div>
+
+               <div className="flex items-center space-x-3">
+                <Phone size={16} className="text-blue-400 flex-shrink-0" />
+                <p className="text-sm text-gray-300">(11) 3909-7929</p>
+               </div>
+
+               <div className="flex items-center space-x-3">
+                <Phone size={16} className="text-blue-400 flex-shrink-0" />
+                <p className="text-sm text-gray-300">(11) 3109-7929</p>
+               </div>
+
               <div className="flex items-center space-x-3">
                 <Mail size={16} className="text-blue-400 flex-shrink-0" />
                 <p className="text-sm text-gray-300">contato@lavaesecaonline.com.br</p>
