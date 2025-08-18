@@ -9,13 +9,20 @@ import {
   MessageCircle,
   Clock
 } from 'lucide-react';
+import { trackWhatsAppClick, trackServiceClick } from '@/utils/gtm';
 
 const Services = () => {
   const whatsappNumber = "5511966424414";
 
-  const handleWhatsAppClick = () => {
-    const mensagem = "Olá! Gostaria de agendar uma visita técnica para conserto de máquina de lavar.";
+  const handleWhatsAppClick = (service?: string) => {
+    const mensagem = service 
+      ? `Olá! Gostaria de agendar uma visita técnica para ${service}.`
+      : "Olá! Gostaria de agendar uma visita técnica.";
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensagem)}`;
+    
+    // Track evento de conversão
+    trackWhatsAppClick('services_section', mensagem);
+    
     window.open(whatsappUrl, '_blank');
   };
 
@@ -37,6 +44,12 @@ const Services = () => {
       title: 'Conserto de Secadora',
       description: 'Assistência técnica completa para secadoras residenciais.',
       features: ['Diagnóstico rápido', 'Peças originais', 'Garantia no serviço', 'Atendimento domiciliar']
+    },
+    {
+      icon: Settings,
+      title: 'Manutenção de Microondas',
+      description: 'Assistência técnica especializada para microondas de todas as marcas.',
+      features: ['Reparo de magnetron', 'Troca de pratos giratórios', 'Conserto de display', 'Limpeza interna']
     }
   ];
 
@@ -78,7 +91,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {services.map((service, index) => (
             <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-2 animate-fade-in-up border-0 shadow-md">
               <CardHeader className="text-center pb-4">
@@ -102,7 +115,10 @@ const Services = () => {
                 <Button 
                   variant="outline" 
                   className="w-full group-hover:bg-primary group-hover:text-white transition-all duration-300"
-                  onClick={handleWhatsAppClick}
+                  onClick={() => {
+                    trackServiceClick(service.title);
+                    handleWhatsAppClick(service.title);
+                  }}
                 >
                   Solicitar Orçamento
                 </Button>
@@ -142,7 +158,7 @@ const Services = () => {
         </div>
 
         <div className="text-center">
-          <Button size="lg" className="font-semibold" onClick={handleWhatsAppClick}>
+          <Button size="lg" className="font-semibold" onClick={() => handleWhatsAppClick()}>
             Agendar Visita Técnica
           </Button>
         </div>
